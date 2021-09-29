@@ -1,0 +1,569 @@
+info:
+  contact: {}
+  version: 1.0.0(jzb-sum)
+paths:
+  /accrual/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据账单类型或往来客户获取应收应付统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据账单类型或往来客户获取应收应付统计数据
+      tags:
+      - 查询统计
+  /accrual/incr:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据应收应付金额更新统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      - description: 账单金额，单位为元，最多2位小数，可以是正负数
+        in: formData
+        name: amount
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据应收应付金额更新统计数据
+      tags:
+      - 更新统计
+  /accrual/list/customer:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据往来客户分组统计应收/应付数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单收支类型编号 3-应收 4-应付
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据往来客户分组统计应收/应付数据
+      tags:
+      - 查询统计
+  /accrual/list/type:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据账单类型分组统计应收/应付数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单收支类型编号 3-应收 4-应付
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据账单类型分组统计应收/应付数据
+      tags:
+      - 查询统计
+  /bill/get/day:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据日期查询账单统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询日期，格式 yyyy-MM-dd
+        in: formData
+        name: day
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据日期查询账单统计数据
+      tags:
+      - 查询统计
+  /bill/get/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据月份查询账单统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询月份，格式 yyyy-MM
+        in: formData
+        name: month
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据月份查询账单统计数据
+      tags:
+      - 查询统计
+  /bill/get/week:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据周查询账单统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 查询周数，1-52
+        in: formData
+        name: week
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据周查询账单统计数据
+      tags:
+      - 查询统计
+  /bill/get/year:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据年份查询账单统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据年份查询账单统计数据
+      tags:
+      - 查询统计
+  /bill/incr:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据收支账单金额更新账单统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 记账时间，格式 yyyy-MM-dd hh:mm:ss，不传为当前时间
+        in: formData
+        name: billTime
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      - description: 账单金额，单位为元，最多2位小数，可以是正负数
+        in: formData
+        name: amount
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据收支账单金额更新账单统计数据
+      tags:
+      - 更新统计
+  /bill/list/customer/day:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据日期列出往来客户分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询日期，格式 yyyy-MM-dd
+        in: formData
+        name: day
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据日期列出往来客户分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/customer/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据月份列出往来客户分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询月份，格式 yyyy-MM
+        in: formData
+        name: month
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据月份列出往来客户分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/customer/week:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据周列出往来客户分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 查询周数，1-52
+        in: formData
+        name: week
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据周列出往来客户分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/customer/year:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据年份列出往来客户分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据年份列出往来客户分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/type/day:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据日期列出账单分类分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询日期，格式 yyyy-MM-dd
+        in: formData
+        name: day
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据日期列出账单分类分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/type/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据月份列出账单分类分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询月份，格式 yyyy-MM
+        in: formData
+        name: month
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据月份列出账单分类分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/type/week:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据周列出账单分类分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 查询周数，1-52
+        in: formData
+        name: week
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据周列出账单分类分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/type/year:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据年份列出账单分类分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询年份，格式 yyyy
+        in: formData
+        name: year
+        required: true
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据年份列出账单分类分组统计数据
+      tags:
+      - 查询统计
+swagger: "2.0"

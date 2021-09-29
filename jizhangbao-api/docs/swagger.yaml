@@ -1,0 +1,1183 @@
+info:
+  contact: {}
+  version: 1.0.0(jzb-api)
+paths:
+  /account/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 在账本中添加自定义资金账户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 资金账户名，如 建行卡-4068
+        in: formData
+        name: billAccountName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 在账本中添加自定义资金账户
+      tags:
+      - 资金账户
+  /account/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 在账本中获取资金账户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 在账本中获取资金账户
+      tags:
+      - 资金账户
+  /account/list:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 列出在账本中所有资金账户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 列出在账本中所有资金账户
+      tags:
+      - 资金账户
+  /account/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 在账本中修改自定义资金账户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        required: true
+        type: string
+      - description: 资金账户名，如 建行卡-4068
+        in: formData
+        name: billAccountName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 在账本中修改自定义资金账户
+      tags:
+      - 资金账户
+  /accrual/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加应收应付账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 记账时间，格式 yyyy-MM-dd hh:mm:ss，不传为当前时间
+        in: formData
+        name: billTime
+        type: string
+      - description: 预约收款/付款日期，格式为 yyyy-MM-dd
+        in: formData
+        name: excuteDate
+        required: true
+        type: string
+      - description: 账单应收应付类型编号 3-应收 4-应付
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加应收应付账单
+      tags:
+      - 应收应付账单
+  /accrual/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 删除应收应付账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 删除应收应付账单
+      tags:
+      - 应收应付账单
+  /accrual/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取指定应收应付账单
+      parameters:
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 获取指定应收应付账单
+      tags:
+      - 应收应付账单
+  /accrual/list/customer:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据往来客户分组统计应收/应付数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单收支类型编号 3-应收 4-应付
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据往来客户分组统计应收/应付数据
+      tags:
+      - 查询统计
+  /accrual/list/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 按月份查询收支账单列表，带统计
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 按指定月份查询，格式 yyyy-MM，不传查当前月份
+        in: formData
+        name: month
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 账单收支类型编号 3-应收 4-应付 0或不传为全部
+        in: formData
+        name: inOut
+        type: integer
+      - description: 是否按预约收款/付款日期分组，0-否 1-是，默认为0
+        in: formData
+        name: excuteDate
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 按月份查询收支账单列表，带统计API
+      tags:
+      - 查询统计
+  /accrual/list/type:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据账单类型分组统计应收/应付数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单收支类型编号 3-应收 4-应付
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据账单类型分组统计应收/应付数据
+      tags:
+      - 查询统计
+  /accrual/record/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加应收应付账单中的收付款记录
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        required: true
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        required: true
+        type: number
+      - description: 是否同步生成收支账单 0-不生成 1-生成，默认不生成
+        in: formData
+        name: sync
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加应收应付账单中的收付款记录
+      tags:
+      - 应收应付账单
+  /accrual/record/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加应收应付账单中的收付款记录
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      - description: 收付款记录号，数组下标，从0开始
+        in: formData
+        name: billRecordIndex
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加应收应付账单中的收付款记录
+      tags:
+      - 应收应付账单
+  /accrual/record/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改应收应付账单中的收付款记录
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        type: number
+      - description: 收付款记录号，数组下标，从0开始
+        in: formData
+        name: billRecordIndex
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 修改应收应付账单中的收付款记录
+      tags:
+      - 应收应付账单
+  /accrual/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改应收应付账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 记账时间，格式 yyyy-MM-dd hh:mm:ss
+        in: formData
+        name: billTime
+        type: string
+      - description: 预约收款/付款日期，格式为 yyyy-MM-dd
+        in: formData
+        name: excuteDate
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 修改应收应付账单
+      tags:
+      - 应收应付账单
+  /bill/list/customer/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据月份列出往来客户分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询月份，格式 yyyy-MM
+        in: formData
+        name: month
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据月份列出往来客户分组统计数据
+      tags:
+      - 查询统计
+  /bill/list/type/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 根据月份列出账单分类分组统计数据
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 查询月份，格式 yyyy-MM
+        in: formData
+        name: month
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 根据月份列出账单分类分组统计数据
+      tags:
+      - 查询统计
+  /book/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 查询获取账本
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 查询获取账本
+      tags:
+      - 账本
+  /book/list:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 列出用户所有账本
+      parameters:
+      - description: 商户编号
+        in: formData
+        name: shopId
+        required: true
+        type: string
+      - description: 用户编号
+        in: formData
+        name: userId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 列出用户所有账本
+      tags:
+      - 账本
+  /book/new:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加账本
+      parameters:
+      - description: 商户编号
+        in: formData
+        name: shopId
+        required: true
+        type: string
+      - description: 用户编号
+        in: formData
+        name: userId
+        required: true
+        type: string
+      - description: 账本名称
+        in: formData
+        name: bookName
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加账本
+      tags:
+      - 账本
+  /book/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 账本改名
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账本名称
+        in: formData
+        name: bookName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 账本改名
+      tags:
+      - 账本
+  /customer/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加往来客户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 往来客户名称
+        in: formData
+        name: customerName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加往来客户
+      tags:
+      - 往来客户
+  /customer/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 删除往来客户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 往来客户名称
+        in: formData
+        name: customerId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 删除往来客户
+      tags:
+      - 往来客户
+  /customer/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取往来客户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 往来客户名称
+        in: formData
+        name: customerId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 获取往来客户
+      tags:
+      - 往来客户
+  /customer/list:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 列表/搜索往来客户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 往来客户名称关键字或简拼，不传为全部
+        in: formData
+        name: customerName
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 列表/搜索往来客户
+      tags:
+      - 往来客户
+  /customer/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改往来客户
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        required: true
+        type: string
+      - description: 往来客户名称
+        in: formData
+        name: customerName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 修改往来客户
+      tags:
+      - 往来客户
+  /flow/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加收支账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        required: true
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 记账时间，格式 yyyy-MM-dd hh:mm:ss，不传为当前时间
+        in: formData
+        name: billTime
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出
+        in: formData
+        name: inOut
+        required: true
+        type: integer
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        required: true
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加收支账单
+      tags:
+      - 收支账单
+  /flow/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 删除收支账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 删除收支账单
+      tags:
+      - 收支账单
+  /flow/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取指定收支账单
+      parameters:
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 获取指定收支账单
+      tags:
+      - 收支账单
+  /flow/list/month:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 按月份查询收支账单列表，带统计
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 按指定月份查询，格式 yyyy-MM，不传查当前月份
+        in: formData
+        name: month
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 账单收支类型编号 1-收入 2-支出 0或不传为全部
+        in: formData
+        name: inOut
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 按月份查询收支账单列表，带统计API
+      tags:
+      - 收支账单
+  /flow/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改收支账单
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单编号
+        in: formData
+        name: billId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        type: string
+      - description: 资金账户编号
+        in: formData
+        name: billAccountId
+        type: string
+      - description: 往来客户编号
+        in: formData
+        name: customerId
+        type: string
+      - description: 记账时间，格式 yyyy-MM-dd hh:mm:ss
+        in: formData
+        name: billTime
+        type: string
+      - description: 备注
+        in: formData
+        name: remark
+        type: string
+      - description: 账单相关照片url数组，JSON数组格式
+        in: formData
+        name: photos
+        type: string
+      - description: 账单金额，单位为元，最多2位小数，正数
+        in: formData
+        name: amount
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 修改收支账单
+      tags:
+      - 收支账单
+  /logs/list:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 操作日志列表
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 开始日期，格式为 yyyy-MM-dd，不传为今天
+        in: formData
+        name: startDate
+        type: string
+      - description: 结束日期，格式为 yyyy-MM-dd，不传为今天
+        in: formData
+        name: endDate
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 操作日志列表
+      tags:
+      - 操作日志
+  /type/add:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加自定义账单类型
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型名称
+        in: formData
+        name: billType
+        required: true
+        type: string
+      - description: 账单类型图标编号
+        in: formData
+        name: billTypeIconId
+        required: true
+        type: string
+      - description: 操作类型：收入/支出/应收/应付
+        in: formData
+        name: operateType
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加自定义账单类型
+      tags:
+      - 账单类型
+  /type/add/public:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 添加公共账单类型
+      parameters:
+      - description: 账单类型名称
+        in: formData
+        name: billType
+        required: true
+        type: string
+      - description: 账单类型图标编号
+        in: formData
+        name: billTypeIconId
+        required: true
+        type: string
+      - description: 操作类型：收入/支出/应收/应付
+        in: formData
+        name: operateType
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 添加公共账单类型
+      tags:
+      - 账单类型
+  /type/del:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 删除自定义账单类型
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 删除自定义账单类型
+      tags:
+      - 账单类型
+  /type/get:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 获取账单类型
+      parameters:
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 获取账单类型
+      tags:
+      - 账单类型
+  /type/list:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 列出账本的账单类型
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 操作类型：收入/支出/应收/应付
+        in: formData
+        name: operateType
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 列出账本的账单类型
+      tags:
+      - 账单类型
+  /type/update:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: 修改自定义账单类型
+      parameters:
+      - description: 账本编号
+        in: formData
+        name: bookId
+        required: true
+        type: string
+      - description: 账单类型编号
+        in: formData
+        name: billTypeId
+        required: true
+        type: string
+      - description: 账单类型名称
+        in: formData
+        name: billType
+        required: true
+        type: string
+      - description: 账单类型图标编号
+        in: formData
+        name: billTypeIconId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: 修改自定义账单类型
+      tags:
+      - 账单类型
+swagger: "2.0"

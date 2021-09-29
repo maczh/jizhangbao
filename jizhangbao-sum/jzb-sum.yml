@@ -1,0 +1,30 @@
+go:
+  application:
+    name: jzb-sum
+    port: 8104
+  nacos:
+    server: 118.31.124.97
+    port: 8848
+    clusterName: DEFAULT
+    weight: 1
+  discovery: nacos
+  config:
+    server: http://172.16.88.125:8848/
+    server_type: nacos
+    env: test
+    type: .yml
+    mid: -go-
+    used: mongodb,nacos,redis
+    prefix:
+      mysql: mysql
+      mongodb: mongodb-jzb
+      redis: redis9
+      ssdb: ssdb
+      rabbitmq: rabbitmq
+      nacos: nacos
+      consul: consul
+  log:
+    api: JzbSumPostLog
+    req: JzbSumRequestLog
+  logger:
+    level: debug

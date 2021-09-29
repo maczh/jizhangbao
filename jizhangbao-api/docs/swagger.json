@@ -1,0 +1,1772 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {},
+        "version": "1.0.0(jzb-api)"
+    },
+    "paths": {
+        "/account/add": {
+            "post": {
+                "description": "在账本中添加自定义资金账户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资金账户"
+                ],
+                "summary": "在账本中添加自定义资金账户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户名，如 建行卡-4068",
+                        "name": "billAccountName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/del": {
+            "post": {
+                "description": "在账本中获取资金账户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资金账户"
+                ],
+                "summary": "在账本中获取资金账户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/list": {
+            "post": {
+                "description": "列出在账本中所有资金账户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资金账户"
+                ],
+                "summary": "列出在账本中所有资金账户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/update": {
+            "post": {
+                "description": "在账本中修改自定义资金账户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "资金账户"
+                ],
+                "summary": "在账本中修改自定义资金账户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户名，如 建行卡-4068",
+                        "name": "billAccountName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/add": {
+            "post": {
+                "description": "添加应收应付账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "添加应收应付账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "记账时间，格式 yyyy-MM-dd hh:mm:ss，不传为当前时间",
+                        "name": "billTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "预约收款/付款日期，格式为 yyyy-MM-dd",
+                        "name": "excuteDate",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单应收应付类型编号 3-应收 4-应付",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/del": {
+            "post": {
+                "description": "删除应收应付账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "删除应收应付账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/get": {
+            "post": {
+                "description": "获取指定应收应付账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "获取指定应收应付账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/list/customer": {
+            "post": {
+                "description": "根据往来客户分组统计应收/应付数据",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询统计"
+                ],
+                "summary": "根据往来客户分组统计应收/应付数据",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 3-应收 4-应付",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/list/month": {
+            "post": {
+                "description": "按月份查询收支账单列表，带统计",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询统计"
+                ],
+                "summary": "按月份查询收支账单列表，带统计API",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "按指定月份查询，格式 yyyy-MM，不传查当前月份",
+                        "name": "month",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 3-应收 4-应付 0或不传为全部",
+                        "name": "inOut",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否按预约收款/付款日期分组，0-否 1-是，默认为0",
+                        "name": "excuteDate",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/list/type": {
+            "post": {
+                "description": "根据账单类型分组统计应收/应付数据",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询统计"
+                ],
+                "summary": "根据账单类型分组统计应收/应付数据",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 3-应收 4-应付",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/record/add": {
+            "post": {
+                "description": "添加应收应付账单中的收付款记录",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "添加应收应付账单中的收付款记录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "是否同步生成收支账单 0-不生成 1-生成，默认不生成",
+                        "name": "sync",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/record/del": {
+            "post": {
+                "description": "添加应收应付账单中的收付款记录",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "添加应收应付账单中的收付款记录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "收付款记录号，数组下标，从0开始",
+                        "name": "billRecordIndex",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/record/update": {
+            "post": {
+                "description": "修改应收应付账单中的收付款记录",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "修改应收应付账单中的收付款记录",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "收付款记录号，数组下标，从0开始",
+                        "name": "billRecordIndex",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/accrual/update": {
+            "post": {
+                "description": "修改应收应付账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "应收应付账单"
+                ],
+                "summary": "修改应收应付账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "记账时间，格式 yyyy-MM-dd hh:mm:ss",
+                        "name": "billTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "预约收款/付款日期，格式为 yyyy-MM-dd",
+                        "name": "excuteDate",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/bill/list/customer/month": {
+            "post": {
+                "description": "根据月份列出往来客户分组统计数据",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询统计"
+                ],
+                "summary": "根据月份列出往来客户分组统计数据",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "查询月份，格式 yyyy-MM",
+                        "name": "month",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 1-收入 2-支出",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/bill/list/type/month": {
+            "post": {
+                "description": "根据月份列出账单分类分组统计数据",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "查询统计"
+                ],
+                "summary": "根据月份列出账单分类分组统计数据",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "查询月份，格式 yyyy-MM",
+                        "name": "month",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 1-收入 2-支出",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/get": {
+            "post": {
+                "description": "查询获取账本",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账本"
+                ],
+                "summary": "查询获取账本",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/list": {
+            "post": {
+                "description": "列出用户所有账本",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账本"
+                ],
+                "summary": "列出用户所有账本",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "商户编号",
+                        "name": "shopId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户编号",
+                        "name": "userId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/new": {
+            "post": {
+                "description": "添加账本",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账本"
+                ],
+                "summary": "添加账本",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "商户编号",
+                        "name": "shopId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "用户编号",
+                        "name": "userId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账本名称",
+                        "name": "bookName",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/book/update": {
+            "post": {
+                "description": "账本改名",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账本"
+                ],
+                "summary": "账本改名",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账本名称",
+                        "name": "bookName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/add": {
+            "post": {
+                "description": "添加往来客户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "往来客户"
+                ],
+                "summary": "添加往来客户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户名称",
+                        "name": "customerName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/del": {
+            "post": {
+                "description": "删除往来客户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "往来客户"
+                ],
+                "summary": "删除往来客户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户名称",
+                        "name": "customerId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/get": {
+            "post": {
+                "description": "获取往来客户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "往来客户"
+                ],
+                "summary": "获取往来客户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户名称",
+                        "name": "customerId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/list": {
+            "post": {
+                "description": "列表/搜索往来客户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "往来客户"
+                ],
+                "summary": "列表/搜索往来客户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户名称关键字或简拼，不传为全部",
+                        "name": "customerName",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/customer/update": {
+            "post": {
+                "description": "修改往来客户",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "往来客户"
+                ],
+                "summary": "修改往来客户",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户名称",
+                        "name": "customerName",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/flow/add": {
+            "post": {
+                "description": "添加收支账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "收支账单"
+                ],
+                "summary": "添加收支账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "记账时间，格式 yyyy-MM-dd hh:mm:ss，不传为当前时间",
+                        "name": "billTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 1-收入 2-支出",
+                        "name": "inOut",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/flow/del": {
+            "post": {
+                "description": "删除收支账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "收支账单"
+                ],
+                "summary": "删除收支账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/flow/get": {
+            "post": {
+                "description": "获取指定收支账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "收支账单"
+                ],
+                "summary": "获取指定收支账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/flow/list/month": {
+            "post": {
+                "description": "按月份查询收支账单列表，带统计",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "收支账单"
+                ],
+                "summary": "按月份查询收支账单列表，带统计API",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "按指定月份查询，格式 yyyy-MM，不传查当前月份",
+                        "name": "month",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "账单收支类型编号 1-收入 2-支出 0或不传为全部",
+                        "name": "inOut",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/flow/update": {
+            "post": {
+                "description": "修改收支账单",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "收支账单"
+                ],
+                "summary": "修改收支账单",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单编号",
+                        "name": "billId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "资金账户编号",
+                        "name": "billAccountId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "往来客户编号",
+                        "name": "customerId",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "记账时间，格式 yyyy-MM-dd hh:mm:ss",
+                        "name": "billTime",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "备注",
+                        "name": "remark",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单相关照片url数组，JSON数组格式",
+                        "name": "photos",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "number",
+                        "description": "账单金额，单位为元，最多2位小数，正数",
+                        "name": "amount",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/logs/list": {
+            "post": {
+                "description": "操作日志列表",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "操作日志"
+                ],
+                "summary": "操作日志列表",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "开始日期，格式为 yyyy-MM-dd，不传为今天",
+                        "name": "startDate",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "结束日期，格式为 yyyy-MM-dd，不传为今天",
+                        "name": "endDate",
+                        "in": "formData"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/add": {
+            "post": {
+                "description": "添加自定义账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "添加自定义账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型名称",
+                        "name": "billType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型图标编号",
+                        "name": "billTypeIconId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "操作类型：收入/支出/应收/应付",
+                        "name": "operateType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/add/public": {
+            "post": {
+                "description": "添加公共账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "添加公共账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账单类型名称",
+                        "name": "billType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型图标编号",
+                        "name": "billTypeIconId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "操作类型：收入/支出/应收/应付",
+                        "name": "operateType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/del": {
+            "post": {
+                "description": "删除自定义账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "删除自定义账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/get": {
+            "post": {
+                "description": "获取账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "获取账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/list": {
+            "post": {
+                "description": "列出账本的账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "列出账本的账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "操作类型：收入/支出/应收/应付",
+                        "name": "operateType",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/type/update": {
+            "post": {
+                "description": "修改自定义账单类型",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "账单类型"
+                ],
+                "summary": "修改自定义账单类型",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "账本编号",
+                        "name": "bookId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型编号",
+                        "name": "billTypeId",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型名称",
+                        "name": "billType",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "账单类型图标编号",
+                        "name": "billTypeIconId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
